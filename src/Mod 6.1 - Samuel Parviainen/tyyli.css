@@ -1,0 +1,31 @@
+body {
+    background: radial-gradient(circle, #ababab 0%, #dedede 100%);
+
+}
+
+.opiskelija_form {
+    border: 5px solid transparent;
+    border-radius: 18px;
+    padding: 30px;
+    background:
+        linear-gradient(#c9c9ca, #b6b6b6) padding-box,
+        linear-gradient(315deg, #2b2b2b 0%, #e8e8e8 100%) border-box;
+    -webkit-background-clip: padding-box, border-box;
+    background-clip: padding-box, border-box;
+}
+
+.opiskelija_row {
+    border: 5px solid transparent;
+    border-radius: 18px;
+    padding: 30px;
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        conic-gradient(from 315deg, #2b2b2b 0%, #e8e8e8 100%) border-box;
+    -webkit-background-clip: padding-box, border-box;
+    background-clip: padding-box, border-box;
+}
+
+td,
+th {
+    padding: 10px 15px;
+}
