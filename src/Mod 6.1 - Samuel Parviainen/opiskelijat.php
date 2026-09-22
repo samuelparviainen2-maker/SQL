@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "</table>";
                         unset($result);
                     } else {
-                        echo "Opiskelijoita ei löytynyt";
+                        echo "<h2>Opiskelijoita ei löytynyt</h2>";
                     }
                     } catch(PDOException $e) {
                     echo "Error: " . $e->getMessage();

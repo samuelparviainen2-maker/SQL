@@ -1,5 +1,5 @@
 body {
-    background: radial-gradient(circle, #ababab 0%, #dedede 100%);
+    background: conic-gradient(from 134deg, #fafafa 27%, #96f897 100%);
 
 }
 
@@ -8,8 +8,8 @@ body {
     border-radius: 18px;
     padding: 30px;
     background:
-        linear-gradient(#c9c9ca, #b6b6b6) padding-box,
-        linear-gradient(315deg, #2b2b2b 0%, #e8e8e8 100%) border-box;
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(315deg, #23ad01 0%, #00fa9a 100%) border-box;
     -webkit-background-clip: padding-box, border-box;
     background-clip: padding-box, border-box;
 }
@@ -32,4 +32,26 @@ th {
 
 table {
     background-color: #ababab !important;
+}
+
+input[type=submit] {
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.2s ease;
+    background: #33b22a;
+    color: #ffffff;
+    box-shadow: 0 0 0 0 rgba(51, 178, 42, 0.5);
+}
+
+input[type=submit]:hover {
+    box-shadow: 0 0 20px 4px rgba(51, 178, 42, 0.5);
+    transform: translateY(-1px);
 }

@@ -7,4 +7,8 @@
     <body>
         <?php include 'header.php';
         ?> 
+        <div class="container-fluid">
+        <h1>Tehdään listoja opiskelijoista ja kursseista.</h1>
+        <h2>Ja Liitetään opikelijoita kursseihin</h2>
+</div>
     </body>

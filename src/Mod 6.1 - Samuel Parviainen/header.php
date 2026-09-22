@@ -27,6 +27,7 @@
         <li><a href="opiskelijat.php">Opiskelijat</a></li>
         <li><a href="kurssit.php">Kurssit</a></li>
         <li><a href="suoritukset.php">Suoritukset</a></li>
+        <li><a href="ilmoittaudu.php">Ilmoittaudu opiskelija kurssiin</a></li>
       </ul>
       
     </div>
