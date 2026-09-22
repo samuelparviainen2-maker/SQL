@@ -29,3 +29,7 @@ td,
 th {
     padding: 10px 15px;
 }
+
+table {
+    background-color: #ababab !important;
+}

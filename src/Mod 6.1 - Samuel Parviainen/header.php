@@ -25,8 +25,8 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="index.php">Home</a></li>
         <li><a href="opiskelijat.php">Opiskelijat</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
+        <li><a href="kurssit.php">Kurssit</a></li>
+        <li><a href="suoritukset.php">Suoritukset</a></li>
       </ul>
       
     </div>

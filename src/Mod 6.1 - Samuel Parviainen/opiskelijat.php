@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $result = $conn->query($sql);
                     // Process the result set
                     if ($result->rowCount() > 0) {
-                        echo "<table><tr><th><h2>Opiskelija_ID</h2></th><th><h2>Etunimi</h2></th><th><h2>Sukunimi</h2></th><th><h2>Puhelinnumero</h2></th><th><h2>Sähköposti</h2></th><th><h2>Postinumero</h2></th><th><h2>Osoite</h2></th></tr>";
+                        echo "<table class='table table-striped'><tr><th><h2>Opiskelija_ID</h2></th><th><h2>Etunimi</h2></th><th><h2>Sukunimi</h2></th><th><h2>Puhelinnumero</h2></th><th><h2>Sähköposti</h2></th><th><h2>Postinumero</h2></th><th><h2>Osoite</h2></th></tr>";
                         // Output data of each row
                         while($row = $result->fetch()) {
                             
