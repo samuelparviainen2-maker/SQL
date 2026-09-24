@@ -39,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-sm-3 opiskelija_form">
-<!--Paikka opiskelijoiden lisäämiseen formilla. Näkyy vasemmalla -->
+            <div class="col-sm-3 form">
+<!--Paikka omistajien lisäämiseen formilla. Näkyy vasemmalla -->
                 <h1>Lisää Omistaja</h1>
                 <br>
                 <br>
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="col-sm-9">
 <!--Paikka Omistajille. Näkyy oikealla -->
-                <h1>Omistajat</h1>
+                <h1 class="Page">Omistajat</h1>
                 <br>
                 <br>
                 <hr>
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "</table>";
                         unset($result);
                     } else {
-                        echo "<h2>Opiskelijoita ei löytynyt</h2>";
+                        echo "<h2>Omistajia ei löytynyt</h2>";
                     }
                     } catch(PDOException $e) {
                     echo "Error: " . $e->getMessage();

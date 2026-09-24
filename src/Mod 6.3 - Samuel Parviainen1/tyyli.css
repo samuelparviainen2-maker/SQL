@@ -1,0 +1,87 @@
+body {
+    /*Tämä tehtiin käyttämässä https://www.cssportal.com/css-pattern-generator/  */
+    background:
+        radial-gradient(50% 50% at 100% 0, #DBEDD6 0% 5%, #FFFFFF 6% 15%, #DBEDD6 16% 25%, #FFFFFF 26% 35%, #DBEDD6 36% 45%,
+            #FFFFFF 46% 55%, #DBEDD6 56% 65%, #FFFFFF 66% 75%, #DBEDD6 76% 85%, #FFFFFF 86% 95%,
+            #0000 96%),
+        radial-gradient(50% 50% at 0 100%, #DBEDD6 0% 5%, #FFFFFF 6% 15%, #DBEDD6 16% 25%, #FFFFFF 26% 35%, #DBEDD6 36% 45%,
+            #FFFFFF 46% 55%, #DBEDD6 56% 65%, #FFFFFF 66% 75%, #DBEDD6 76% 85%, #FFFFFF 86% 95%,
+            #0000 96%),
+        radial-gradient(50% 50%, #DBEDD6 0% 5%, #FFFFFF 6% 15%, #DBEDD6 16% 25%, #FFFFFF 26% 35%, #DBEDD6 36% 45%,
+            #FFFFFF 46% 55%, #DBEDD6 56% 65%, #FFFFFF 66% 75%, #DBEDD6 76% 85%, #FFFFFF 86% 95%,
+            #0000 96%),
+        radial-gradient(50% 50%, #DBEDD6 0% 5%, #FFFFFF 6% 15%, #DBEDD6 16% 25%, #FFFFFF 26% 35%, #DBEDD6 36% 45%,
+            #FFFFFF 46% 55%, #DBEDD6 56% 65%, #FFFFFF 66% 75%, #DBEDD6 76% 85%, #FFFFFF 86% 95%,
+            #0000 96%) 100px 100px;
+    background-size: 200px 200px;
+    background-color: #DBEDD6;
+}
+
+td,
+th {
+    padding: 10px 15px;
+}
+
+table {
+    background-color: #ababab !important;
+    border-radius: 10px;
+}
+
+input[type=submit] {
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.2s ease;
+    background: #33b22a;
+    color: #ffffff;
+    box-shadow: 0 0 0 0 rgba(51, 178, 42, 0.5);
+}
+
+input[type=submit]:hover {
+    box-shadow: 0 0 20px 4px rgba(51, 178, 42, 0.5);
+    transform: translateY(-1px);
+}
+
+.form {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 15px;
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #444444;
+}
+
+.Page {
+    border-radius: 5px;
+    background-color: white;
+    width: fit-content;
+    padding: 5px;
+}
+
+.navbar {
+    background-color: #0c9602 !important;
+    border-color: white !important;
+}
+
+a {
+    color: white !important;
+}
+
+a:hover {
+    background-color: #054d00 !important;
+}
