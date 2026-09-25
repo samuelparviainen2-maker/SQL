@@ -71,6 +71,7 @@ hr {
     background-color: white;
     width: fit-content;
     padding: 5px;
+    border: 2px solid black;
 }
 
 .navbar {
@@ -84,4 +85,17 @@ a {
 
 a:hover {
     background-color: #054d00 !important;
+}
+
+.muokkaus {
+    border-radius: 5px;
+    background-color: white;
+    width: fit-content;
+    padding: 5px;
+    border: 2px solid black;
+    color: black !important;
+}
+
+.muokkaus:hover {
+    background-color: rgb(199, 198, 198) !important;
 }

@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "<td><h3>" . $row['rekisterinumero'] . "</h3></td>";
                             echo "<td><h3>" . $row['omistaja'] . "</h3></td>";
                             echo "<td><h3>" . $row['Nimi'] . "</h3></td>";
-                            echo "<td><a href='muokkaa.php?rekisterinumero=" . $row['rekisterinumero'] . "'>Muokkaa</a></td>";
+                            echo "<td><a href='muokkaa.php?rekisterinumero=" . $row['rekisterinumero'] . "' class='muokkaus'>Muokkaa</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";
