@@ -19,7 +19,8 @@
       <li class="active"><a href="#">Home</a></li>
       <li><a href="asiakkaat.php">Asiakkaat</a></li>
       <li><a href="tuotteet.php">Tuotteet</a></li>
-      <li><a href="#">Page 3</a></li>
+      <li><a href="tilaukset.php">Tilaukset</a></li>
+      <li><a href="tilausrivit.php">Tilausrivit</a></li>
     </ul>
   </div>
 </nav>

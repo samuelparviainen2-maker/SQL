@@ -4,31 +4,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Asetetaan asiakkaan tiedot
    
             
-    $Enimi   = $_POST["Etunimi"];
-    $Snimi   = $_POST["Sukunimi"];
-    $Osoite  = $_POST["Osoite"];
+    $Nimi   = $_POST["nimi"];
+    $Kuvaus   = $_POST["kuvaus"];
+    $Hinta  = $_POST["hinta"];
 
-    $Puh     = $_POST["Puhelinnumero"];
-    $Sahko   = $_POST["Sahkoposti"];
+    $Kuva     = $_POST["kuva"];
+    $Varasto   = $_POST["varasto"];
 
-    $Aryhma  = $_POST["asiakasryhma"];
-    $Historia = $_POST["ostohistoria"];
-    $AsiakId = $_POST["asiak_id"] ?? null;
+    $Ryhma  = $_POST["ryhma"];
+
+    $TuoteId = $_POST["tuote_id"] ?? null;
 
 
     
-        if (!empty($AsiakId)) { // Muokkauslomakkeelta tulee asiakas_id
-                $sql = "UPDATE asiakkaat SET etunimi = '$Enimi', sukunimi = '$Snimi', osoite = '$Osoite', puhelinnumero = '$Puh', sahkoposti = '$Sahko', asiakasryhma = '$Aryhma', ostohistoria = '$Historia' WHERE asiakas_id = '$AsiakId'";
+        if (!empty($TuoteId)) { // Muokkauslomakkeelta tulee tuote_id
+                $sql = "UPDATE tuotteet SET nimi = '$Nimi', kuvaus = '$Kuvaus', hinta = '$Hinta', kuva = '$Kuva', varastotilanne = '$Varasto', tuoteryhma = '$Ryhma' WHERE tuote_id = '$TuoteId'";
                 $conn->exec($sql);
-                header("location:asiakkaat.php");
+                header("location:tuotteet.php");
                 exit;
-        } else {  // Lisäyslomakkeelta ei tule asiakas_id:tä
+        } else {  // Jos lisäyslomakkeelta ei tule tuote_id:tä
     //Insertataan arvot sql tauluun
     try {
-        $sql = "INSERT INTO asiakkaat (etunimi, sukunimi, osoite, puhelinnumero, sahkoposti, asiakasryhma, ostohistoria)
-        VALUES ('$Enimi', '$Snimi', '$Osoite', '$Puh', '$Sahko', '$Aryhma', '$Historia')";
+        $sql = "INSERT INTO tuotteet (nimi, kuvaus, hinta, kuva, varastotilanne, tuoteryhma)
+        VALUES ('$Nimi', '$Kuvaus', '$Hinta', '$Kuva', '$Varasto', '$Ryhma')";
         $conn->exec($sql);
-        header("location:asiakkaat.php");
+        header("location:tuotteet.php");
         } catch(PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }
@@ -43,23 +43,23 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
     global $conn;
     
     
-    if (isset($_GET['asiakas_id'])) { // Se varmistaa onko linkkiä painettu
-    $osat = explode('|', $_GET['asiakas_id'], 2);
+    if (isset($_GET['tuote_id'])) { // Se varmistaa onko linkkiä painettu
+    $osat = explode('|', $_GET['tuote_id'], 2);
     if (count($osat) !== 2) {
         return;
     }
 
-    [$a_id, $loput] = $osat; // jakaa tunnuksen id:ksi ja toiminnoksi
+    [$t_id, $loput] = $osat; // jakaa tunnuksen id:ksi ja toiminnoksi
     if($loput === 'muokkaus'){
          try {
-                $sql = "SELECT asiakas_id, $M_asia FROM asiakkaat"; //hakee selectillä ainoastaan tarvittavan asian ja id:n, jotta voidaan ottaa ainoastaan Esim. tietyn asiakkaan etunimen
+                $sql = "SELECT tuote_id, $M_asia FROM tuotteet"; //hakee selectillä ainoastaan tarvittavan asian ja id:n, jotta voidaan ottaa ainoastaan Esim. tietyn asiakkaan etunimen
                 // Execute the SQL query
                 $result = $conn->query($sql);
                 // Process the result set
                 if ($result->rowCount() > 0) {
                     
                 while($row = $result->fetch()) {
-                    if($a_id == $row['asiakas_id']) //ottaa ainoastaa muokattavan asiakkaan asian
+                    if($t_id == $row['tuote_id']) //ottaa ainoastaa muokattavan asiakkaan asian
                         {
                             echo ($row[$M_asia]); //ja tulostaa tietyn asiakkaan haettava asia
                         }
@@ -67,7 +67,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
                 }
                 
                 } else {
-                    echo "<h2>Asiakkaita ei löytynyt</h2>"; //Jos ei löydy, niin tulee virheestä ilmoitus
+                    echo "<h2>Tuotteita ei löytynyt</h2>"; //Jos ei löydy, niin tulee virheestä ilmoitus
                 }
                 } catch(PDOException $e) {
                     echo "Error: " . $e->getMessage();
@@ -75,7 +75,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
         
     }
     if($loput == 'poisto'){
-        $sql = "DELETE FROM asiakkaat WHERE asiakas_id=$a_id";
+        $sql = "DELETE FROM tuotteet WHERE tuote_id=$t_id";
 
     if ($conn->query($sql) === TRUE) {
     } else {
@@ -119,7 +119,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
                     <label for="hinta"><h2>Hinta</h2></label>
                     <input type="number" name="hinta" max="10000" min="0" step="0.01"  value="<?php muokkaus('hinta') ?>" required>
                     <br>
-                    <label for="kuva"><h2>Kuva</h2></label>
+                    <label for="kuva"><h2>Kuva linkki</h2></label>
                     <input type="text" name="kuva" value="<?php muokkaus('kuva') ?>" required>
                     <br>
                     <hr>
@@ -164,6 +164,8 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
                         <th><h2>Kuva</h2></th>
                         <th><h2>Varastotilanne</h2></th>
                         <th><h2>Tuoteryhmä</h2></th>
+                        <th><h2>Muokkaa</h2></th>
+                        <th><h2>Poista</h2></th>
                         
                         </tr>";
                         // Output data of each row
@@ -175,12 +177,12 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
                             echo "<td><h3>" . $row['nimi'] . "</h3></td>";
                             echo "<td><h3>" . $row['kuvaus'] . "</h3></td>";
                             echo "<td><h3>" . $row['hinta'] . "</h3></td>";
-                            echo "<td><h3>" . $row['kuva'] . "</h3></td>";
+                            echo "<td><h3><img src=' ". $row['kuva'] ." '></h3></td>";
                             echo "<td><h3>" . $row['varastotilanne'] . "</h3></td>";
                             echo "<td><h3>" . $row['tuoteryhma'] . "</h3></td>";
                             
-                            echo "<td><a href='tuotteet.php?asiakas_id=" . $row['tuote_id'] . '|muokkaus' . "' class='muokkaus'>Muokkaa</a></td>";
-                            echo "<td><a href='tuotteet.php?asiakas_id=" . $row['tuote_id'] . '|poisto' ."' class='poisto'>Poista</a></td>";
+                            echo "<td><a href='tuotteet.php?tuote_id=" . $row['tuote_id'] . '|muokkaus' . "' class='muokkaus'>Muokkaa</a></td>";
+                            echo "<td><a href='tuotteet.php?tuote_id=" . $row['tuote_id'] . '|poisto' ."' class='poisto'>Poista</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";
