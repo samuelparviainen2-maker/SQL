@@ -39,48 +39,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //Luodaan funktio, millä saadaan tiedon muokkaaminen suoritettua
 function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
     global $conn;
-    
-    
+
     if (isset($_GET['tilaus_id'])) { // Se varmistaa onko linkkiä painettu
-    $osat = explode('|', $_GET['tilaus_id'], 2);
-    if (count($osat) !== 2) {
-        return;
-    }
+        $osat = explode('|', $_GET['tilaus_id'], 2);
+        if (count($osat) !== 2) {
+            return '';
+        }
 
-    [$t_id, $loput] = $osat; // jakaa tunnuksen id:ksi ja toiminnoksi
-    if($loput === 'muokkaus'){
-         try {
+        [$t_id, $loput] = $osat; // jakaa tunnuksen id:ksi ja toiminnoksi
+        if ($loput === 'muokkaus') {
+            try {
                 $sql = "SELECT tilaus_id, $M_asia FROM tilaukset"; //hakee selectillä ainoastaan tarvittavan asian ja id:n, jotta voidaan ottaa ainoastaan Esim. tietyn asiakkaan etunimen
-                // Execute the SQL query
                 $result = $conn->query($sql);
-                // Process the result set
                 if ($result->rowCount() > 0) {
-                    
-                while($row = $result->fetch()) {
-                    if($t_id == $row['tilaus_id']) //ottaa ainoastaa muokattavan asiakkaan asian
-                        {
-                            echo ($row[$M_asia]); //ja tulostaa tietyn asiakkaan haettava asia
+                    while ($row = $result->fetch()) {
+                        if ($t_id == $row['tilaus_id']) {
+                            return (string) $row[$M_asia];
                         }
-                
+                    }
                 }
-                
-                } else {
-                    echo "<h2>Tilauksia ei löytynyt</h2>"; //Jos ei löydy, niin tulee virheestä ilmoitus
-                }
-                } catch(PDOException $e) {
-                    echo "Error: " . $e->getMessage();
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
             }
-        
-    }
-    if($loput == 'poisto'){
-        $sql = "DELETE FROM tilaukset WHERE tilaus_id=$t_id";
+        }
 
-    if ($conn->query($sql) === TRUE) {
-    } else {
+        if ($loput == 'poisto') {
+            $sql = "DELETE FROM tilaukset WHERE tilaus_id=$t_id";
+            $conn->query($sql);
+        }
     }
 
-    }
-    }
+    return '';
 }
 
 
@@ -92,6 +81,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
 <head>
   <title>Etusivu</title>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
 </head>
     <body>
         <div>
@@ -101,26 +91,25 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
     
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-sm-3 opiskelija_form">
+            <div class="col-sm-3 opiskelija_form formi">
 <!--Paikka Tilausten lisäämiseen formilla näkyy vasemmalla. Lisäksi jos on painettu muokkaus nappia, niin käytetään formia muokkaukseen -->
                 <h1>Lisää tai muokkaa tilauksia</h1>
                 <br>
                 <br>
                 <form action="tilaukset.php" method="POST">
-                    <input type="hidden" name="tilaus_id" value="<?php muokkaus('tilaus_id')//tällä tallennetaan tilaus_id, muokkauksen sql update kohtaan, jotta on oikea tilaus mitä päivitetään?>">
+                    <input type="hidden" name="tilaus_id" value="<?php echo muokkaus('tilaus_id'); //tällä tallennetaan tilaus_id, muokkauksen sql update kohtaan, jotta on oikea tilaus mitä päivitetään?>">
                     <label for="asiakas_id"><h2>Asiakas ID</h2></label>
+                    <?php $muokattuAsiakasId = muokkaus('asiakas_id'); ?>
                     <select name="asiakas_id" required>
                             <?php
                         try {
                             $sql = "SELECT asiakas_id, etunimi, sukunimi FROM asiakkaat";
-                            // Execute the SQL query
                             $result = $conn->query($sql);
-                            // Process the result set
                             if ($result->rowCount() > 0) {
-                                // Output data of each row
                                 while($row = $result->fetch()) { // Ottaa asiakkaan nimen ja laittaa sen tekstiin, ja ottaa asiakkaan id.n ja säilyttää sen valuena.
+                                    $onValittu = ($muokattuAsiakasId !== '' && (string) $row['asiakas_id'] === (string) $muokattuAsiakasId);
                                 ?>
-                                <option value="<?php echo $row['asiakas_id']; ?>" <?php if(muokkaus('asiakas_id') != "<h2>Tilauksia ei löytynyt</h2>"){echo "selected";} ?>>
+                                <option value="<?php echo $row['asiakas_id']; ?>" <?php if($onValittu){ echo "selected"; } ?>>
                                     <?php echo $row['asiakas_id'].' | '.$row['etunimi'] .' '. $row['sukunimi'];  ?></option>
                                 <?php
                                 }
@@ -135,18 +124,18 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
                     </select>
                     <br>
                     <label for="tilauspaiva"><h2>Tilauspäivä</h2></label>
-                    <input type="date" name="tilauspaiva" value="<?php muokkaus('tilauspaiva') ?>" required>
+                    <input type="date" name="tilauspaiva" value="<?php echo muokkaus('tilauspaiva'); ?>" required>
                     <br>
                     <label for="toimituspaiva"><h2>Toimituspäivä</h2></label>
-                    <input type="date" name="toimituspaiva" value="<?php muokkaus('toimituspaiva') ?>">
+                    <input type="date" name="toimituspaiva" value="<?php echo muokkaus('toimituspaiva'); ?>">
                     <br>
                     <label for="tila"><h2>Tila</h2></label>
-                    <input type="text" name="tila" max="255" value="<?php muokkaus('tila') ?>" required>
+                    <input type="text" name="tila" max="255" value="<?php echo muokkaus('tila'); ?>" required>
                     <br>
                     <hr>
                     <br>
                     <label for="lisahuomautukset"><h2>Lisähuomautukset</h2></label>
-                    <textarea name="lisahuomautukset"><?php muokkaus('lisahuomautukset') ?></textarea>
+                    <textarea name="lisahuomautukset"><?php echo muokkaus('lisahuomautukset'); ?></textarea>
                     
                     <br>
                     <hr>
@@ -157,7 +146,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
 
 
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-9 list">
 
                 <h1>Tilaukset</h1>
                 <br>
@@ -200,8 +189,8 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
                             echo "<td><h3>" . $row['tila'] . "</h3></td>";
                             echo "<td><h3>" . $row['lisahuomautukset'] . "</h3></td>";
                             
-                            echo "<td><a href='tilaukset.php?tilaus_id=" . $row['tilaus_id'] . '|muokkaus' . "' class='muokkaus'>Muokkaa</a></td>";
-                            echo "<td><a href='tilaukset.php?tilaus_id=" . $row['tilaus_id'] . '|poisto' ."' class='poisto'>Poista</a></td>";
+                            echo "<td><a href='tilaukset.php?tilaus_id=" . $row['tilaus_id'] . '|muokkaus' . "' class='muutos'>Muokkaa</a></td>";
+                            echo "<td><a href='tilaukset.php?tilaus_id=" . $row['tilaus_id'] . '|poisto' ."' class='muutos'>Poista</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";

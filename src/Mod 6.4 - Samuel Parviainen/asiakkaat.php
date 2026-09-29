@@ -94,7 +94,8 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
 <head>
   <title>Etusivu</title>
   <meta charset="utf-8">
-<head>
+  <link rel="stylesheet" href="style.css">
+</head>
     <body>
         <div>
         <?php include 'header.php';
@@ -103,7 +104,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
     
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-sm-3 opiskelija_form">
+            <div class="col-sm-3 opiskelija_form formi">
 <!--Paikka asiakkaiden lisäämiseen formilla näkyy vasemmalla. Lisäksi jos on painettu muokkaus nappia, niin käytetään formia muokkaukseen -->
                 <h1>Lisää tai muokkaa asiakas</h1>
                 <br>
@@ -143,7 +144,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
 
 
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-9 list">
 
                 <h1>Asiakkaat</h1>
                 <br>
@@ -185,8 +186,8 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
                             echo "<td><h3>" . $row['sahkoposti'] . "</h3></td>";
                             echo "<td><h3>" . $row['asiakasryhma'] . "</h3></td>";
                             echo "<td><h3>" . $row['ostohistoria'] . "</h3></td>";
-                            echo "<td><a href='asiakkaat.php?asiakas_id=" . $row['asiakas_id'] . '|muokkaus' . "' class='muokkaus'>Muokkaa</a></td>";
-                            echo "<td><a href='asiakkaat.php?asiakas_id=" . $row['asiakas_id'] . '|poisto' ."' class='poisto'>Poista</a></td>";
+                            echo "<td><a href='asiakkaat.php?asiakas_id=" . $row['asiakas_id'] . '|muokkaus' . "' class='muutos'>Muokkaa</a></td>";
+                            echo "<td><a href='asiakkaat.php?asiakas_id=" . $row['asiakas_id'] . '|poisto' ."' class='muutos'>Poista</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";
@@ -202,4 +203,5 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
             <div>
         </div>
     </div>
+    
 </body>

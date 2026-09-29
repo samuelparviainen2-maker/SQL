@@ -94,6 +94,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
 <head>
   <title>Etusivu</title>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
 <head>
     <body>
         <div>
@@ -103,7 +104,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
     
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-sm-3 opiskelija_form">
+            <div class="col-sm-3 opiskelija_form formi">
 <!--Paikka Tuotteiden lisäämiseen formilla näkyy vasemmalla. Lisäksi jos on painettu muokkaus nappia, niin käytetään formia muokkaukseen -->
                 <h1>Lisää tai muokkaa tuotteita</h1>
                 <br>
@@ -139,7 +140,7 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
 
 
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-9 list">
 
                 <h1>Tuotteet</h1>
                 <br>
@@ -181,8 +182,8 @@ function muokkaus($M_asia) { //funktio ottaa asian, muokkaus formissa haetaan
                             echo "<td><h3>" . $row['varastotilanne'] . "</h3></td>";
                             echo "<td><h3>" . $row['tuoteryhma'] . "</h3></td>";
                             
-                            echo "<td><a href='tuotteet.php?tuote_id=" . $row['tuote_id'] . '|muokkaus' . "' class='muokkaus'>Muokkaa</a></td>";
-                            echo "<td><a href='tuotteet.php?tuote_id=" . $row['tuote_id'] . '|poisto' ."' class='poisto'>Poista</a></td>";
+                            echo "<td><a href='tuotteet.php?tuote_id=" . $row['tuote_id'] . '|muokkaus' . "' class='muutos'>Muokkaa</a></td>";
+                            echo "<td><a href='tuotteet.php?tuote_id=" . $row['tuote_id'] . '|poisto' ."' class='muutos'>Poista</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>";

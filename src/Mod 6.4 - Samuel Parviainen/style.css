@@ -1,0 +1,57 @@
+.formi {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-radius: 10px;
+    padding: 5px;
+    border: solid rgba(109, 109, 109, 0.596);
+}
+
+input[type="submit"] {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(29, 78, 216, 0.35);
+}
+
+input[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(29, 78, 216, 0.25);
+}
+
+.list {
+    background: radial-gradient(circle, #d9f3f2 0%, #edf0ed 100%);
+}
+
+.muutos {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 14px;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.2s ease;
+    background: #5e5d5d;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(117, 117, 117, 0.35);
+}
+
+.muutos:hover {
+    opacity: 0.88;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(88, 88, 88, 0.45);
+}
